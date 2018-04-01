@@ -43,7 +43,7 @@ package com.example.android.justjava;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    int quantity=0;
 
     @Override
 
@@ -64,23 +64,32 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void submitOrder(View view) {
-
-        int quantity=3;
-        display(quantity);
         displayPrice(quantity*5);
 
     }
 
+    /**
+
+     * This method is called when the increment button is clicked.
+
+     */
+
     public void increment(View view) {
 
-        int quantity=3;
+        quantity=quantity+1;
         display(quantity);
 
     }
 
+    /**
+
+     * This method is called when the decrement button is clicked.
+
+     */
+
     public void decrement(View view) {
 
-        int quantity=1;
+        quantity=quantity-1;
         display(quantity);
 
     }
