@@ -71,6 +71,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void increment(View view) {
+
+        int quantity=3;
+        display(quantity);
+
+    }
+
+    public void decrement(View view) {
+
+        int quantity=1;
+        display(quantity);
+
+    }
+
 
 
     /**
