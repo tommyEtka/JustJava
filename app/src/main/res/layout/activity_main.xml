@@ -58,8 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Price"
-        android:textAllCaps="true"
+        android:text="PRICE"
         android:textSize="16sp" />
 
 
@@ -69,7 +68,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="$0"
-        android:textAllCaps="true"
         android:textColor="@android:color/black" />
 
 
