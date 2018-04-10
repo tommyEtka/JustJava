@@ -19,6 +19,8 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -29,14 +31,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
-    //int price = 0;
+    // int price = 0;
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
     }
@@ -47,8 +47,17 @@ public class MainActivity extends AppCompatActivity {
      * @return total price
      */
 
-    public int calculatePrice() {
-        return quantity * 5;
+    public int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+        int basePrice = 5;
+        if (addWhippedCream) {
+            basePrice = basePrice + 1;
+        }
+
+        if (addChocolate) {
+            basePrice = basePrice + 2;
+        }
+
+        return quantity * basePrice;
     }
 
 
@@ -56,11 +65,12 @@ public class MainActivity extends AppCompatActivity {
      * Shows a summary of the order
      */
 
-    private String createOrderSummary(int price) {
-        String name = "Tometka Thurman";
-        String priceMessage = "Name: " + name + " \n"
-                + "Quantity: " + quantity + "\n"
-                + "Total: $" + calculatePrice();
+    private String createOrderSummary(String name, int price, boolean addWhippedCream, boolean addChocolate) {
+        String priceMessage = "Name: " + name + " \n";
+        priceMessage += "Add whipped cream?: " + addWhippedCream + "\n";
+        priceMessage += "Add chocolate?: " + addChocolate + "\n";
+        priceMessage += "Quantity: " + quantity + "\n";
+        priceMessage += "Total: $" + calculatePrice(addWhippedCream,addChocolate);
         priceMessage += " \nThank you!";
         return priceMessage;
     }
@@ -71,8 +81,26 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void submitOrder(View view) {
-        int price = calculatePrice();
-        displayMessage(createOrderSummary(price));
+        EditText nameField = (EditText) findViewById(R.id.name_field);
+        String name = nameField.getText().toString();
+
+
+        CheckBox whippedCreamCheckBox = (CheckBox) findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
+
+
+        // Figure out if the user wants chocolate topping
+        CheckBox chocolateCheckBox = (CheckBox) findViewById(R.id.chocolate_checkbox);
+        boolean hasChocolate = chocolateCheckBox.isChecked();
+
+
+        // Calculate the price
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
+
+
+        // Display the order summary on the screen
+        String message = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
+        displayMessage(message);
 
     }
 
@@ -82,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void increment(View view) {
-
         quantity = quantity + 1;
         displayQuantity(quantity);
 
@@ -93,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void decrement(View view) {
-
         quantity = quantity - 1;
         displayQuantity(quantity);
 
@@ -105,13 +131,10 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void displayQuantity(int number) {
-
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-
         quantityTextView.setText("" + number);
 
     }
-
 
 
     /**
@@ -119,9 +142,7 @@ public class MainActivity extends AppCompatActivity {
      */
 
     private void displayMessage(String message) {
-
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-
         orderSummaryTextView.setText(message);
 
     }
