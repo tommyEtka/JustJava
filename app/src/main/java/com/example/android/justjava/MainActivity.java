@@ -110,10 +110,6 @@ public class MainActivity extends AppCompatActivity {
         if(intent.resolveActivity(getPackageManager()) !=null){
             startActivity(intent);
         }
-
-
-        displayMessage(message);
-
     }
 
 
@@ -155,15 +151,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * This method displays the given text on the screen.
-     */
-
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-
-    }
 
 
 }
